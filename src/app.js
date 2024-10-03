@@ -2,21 +2,22 @@ const express = require("express");
 
 const app = express();
 
-const { adminAuth, userAuth } = require("./middlewares/auth");
+
+app.use("/", (err, req, res, next) => {
+    if (err) {
+        res.status(500).send("Something went wrong");
+    }
+});
+app.get("/getUserData", (req, res) => {
+    try{
+        throw new Error("Random data is entered");
+        res.send("User data send");
+    } catch(err){
+        res.status(500).send("Something goes wrong");
+    }
+});
 
 
-app.use("/admin", adminAuth);
-
-app.get("/user", userAuth, (req, res) => {
-    res.send("User data send");
-})
-app.get("/admin/getAllData", (req, res) => {
-    res.send("All data send");
-})
-
-app.get("/admin/deleteUser", (req, res) => {
-    res.send("User deleted successfully");
-})
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
