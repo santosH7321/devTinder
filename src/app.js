@@ -2,27 +2,24 @@ const express = require("express");
 
 const app = express();
 
+app.use("/admin", (req, res, next) => {
+    console.log("Checking authorization");
+    const token = "xyz";
+    const isAuthenticated = token === "xyz";
+    if(!isAuthenticated){
+        res.status(401).send("Unauthorized");
+    } else {
+        next();
+    }
+});
 
-// app.use("/user", (req, res) => {
-//     res.send("Haaaahaaa");
-// })
-app.get("/user", (req, res) => {
-    res.send({firstName: "Santosh", lastName: "Kumar"});
+app.get("/admin/getAllData", (req, res) => {
+    res.send("All data send");
 })
 
-app.post("/user", (req, res) => {
-    res.send("Data successfully, saved to the database");
-})
-
-app.delete("/user", (req, res) => {
+app.get("/admin/deleteUser", (req, res) => {
     res.send("User deleted successfully");
 })
-
-//  this will match all the HTTP methods API calls to /test
-app.use("/test", (req, res) => {
-    res.send("Hello from the server");
-})
-
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
