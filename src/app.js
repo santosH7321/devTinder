@@ -1,33 +1,22 @@
 import express from "express";
-import {connectDB} from "./config/database.js";
-import User from "./models/user.js";
+import dotenv from "dotenv";
+import { connectDB } from "../Database/database.js";
+import cookieParser from "cookie-parser";
 
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(cookieParser());
 
 
-app.post("/signup", async (req, res) => {
-  
-
-  const user = new User({
-    firstName: "Nishant",
-    lastName: "Kumar",
-    email: "robin@gmail.com",
-    password: "robiN@123",
-  });
-
-  try {
-    await user.save();
-    res.send("User Added successfully!");
-  } catch (err) {
-    console.error(err);
-  }
-});
 
 connectDB()
   .then(() => {
     console.log("Connection is established!!");
-    app.listen(7777, () => {
+    app.listen(PORT, () => {
       console.log("Server is running on port 7777");
     });
   })
