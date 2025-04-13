@@ -1,7 +1,10 @@
-const express = require("express");
-const connectDB = require("./config/database");
+import express from "express";
+import {connectDB} from "./config/database.js";
+import User from "./models/user.js";
+
+
 const app = express();
-const User = require("./models/user");
+
 
 app.post("/signup", async (req, res) => {
   

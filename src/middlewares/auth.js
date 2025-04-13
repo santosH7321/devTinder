@@ -1,4 +1,4 @@
-const adminAuth = (req, res, next) => {
+export const adminAuth = (req, res, next) => {
     console.log("Checking authorization");
     const token = "xyz";
     const isAuthenticated = token === "xyz";
@@ -8,7 +8,7 @@ const adminAuth = (req, res, next) => {
         next();
     }
 };
-const userAuth = (req, res, next) => {
+export const userAuth = (req, res, next) => {
     console.log("Checking authorization");
     const token = "xyz";
     const isAuthenticated = token === "xyz";
@@ -19,7 +19,4 @@ const userAuth = (req, res, next) => {
     }
 };
 
-module.exports = {
-    adminAuth,
-    userAuth,
- };
+
