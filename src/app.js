@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { connectDB } from "../Database/database.js";
+import { connectDB } from "./config/database.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -11,15 +11,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cookieParser());
 
-
-
 connectDB()
   .then(() => {
-    console.log("Connection is established!!");
+    console.log("Connection is established!! ✅");
     app.listen(PORT, () => {
-      console.log("Server is running on port 7777");
+      console.log(`Server is running on port ${PORT}`);
     });
   })
   .catch((err) => {
-    console.error("Database can not be connected");
+    console.error("Database can not be connected ❌");
   });
